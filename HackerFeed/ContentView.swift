@@ -18,9 +18,9 @@ struct ContentView: View {
             List(networkManager.posts) { post in Text(post.title) }
                 .navigationBarTitle("HackerFeed")
         }
+        .onAppear {
             // like viewDidLoad, as soon as it appears the function in the closure is called
-            .onAppear {
-                self.networkManager.fetchData()
+            self.networkManager.fetchData()
         }
     }
 }
