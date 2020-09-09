@@ -15,12 +15,16 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView {
-            List(networkManager.posts) { post in HStack {
-                Text(String(post.points))
-                Text(post.title)
+            List(networkManager.posts) { post in
+                NavigationLink(destination: DetailView(url: post.url)) {
+                    HStack {
+                        Text(String(post.points))
+                        Text(post.title)
+                    }
                 }
+                
             }
-                .navigationBarTitle("HackerFeed")
+            .navigationBarTitle("HackerFeed")
         }
         .onAppear {
             // like viewDidLoad, as soon as it appears the function in the closure is called
