@@ -9,8 +9,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    // this property is a listener, it is 'subscribed' to the updates from the NetworkManager
+    @ObservedObject var networkManager = NetworkManager()
+    
     var body: some View {
-        Text("Hello, World!")
+        NavigationView {
+            List(networkManager.posts) { post in Text(post.title) }
+                .navigationBarTitle("HackerFeed")
+        }
+            // like viewDidLoad, as soon as it appears the function in the closure is called
+            .onAppear {
+                self.networkManager.fetchData()
+        }
     }
 }
 
